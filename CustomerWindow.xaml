@@ -1,0 +1,106 @@
+﻿<Window x:Class="CourseProject.CustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseProject"
+        mc:Ignorable="d"
+        Title="CustomerWindow" Height="550" Width="1000" ResizeMode="NoResize">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Personal Data">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Center" Grid.Column="0">
+                        <Label Content="Write the personal data:" HorizontalAlignment="Center"/>
+                        <Label Content="Name:" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="textBox_name"/>
+                        <Label Content="Surname:" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="textBox_surname"/>
+                        <Label Content="Date of birth:" HorizontalAlignment="Center"/>
+                        <DatePicker x:Name="datePicker"/>
+                        <Border BorderBrush="Green" BorderThickness="1" CornerRadius="5" Margin="10">
+                            <StackPanel>
+                                <Label Content="Wallet:" HorizontalAlignment="Center"/>
+                                <TextBox x:Name="textBox_wallet" Margin="5" TextChanged="textBox_wallet_TextChanged"/>
+                                <Label Content="Name of card:" HorizontalAlignment="Center"/>
+                                <TextBox x:Name="textBox_nameCard" Margin="5"/>
+                                <Label Content="Scores of card:" HorizontalAlignment="Center"/>
+                                <TextBox x:Name="textBox_scores" Margin="5" TextChanged="textBox_scores_TextChanged"/>
+                            </StackPanel>
+                        </Border>
+                        <Label Content="Choose the purchases:" HorizontalAlignment="Center" Margin="5"/>
+                        <ComboBox x:Name="comboBox_products">
+                            <ComboBoxItem>apple</ComboBoxItem>
+                            <ComboBoxItem>meet</ComboBoxItem>
+                            <ComboBoxItem>fat meet</ComboBoxItem>
+                            <ComboBoxItem>exotic meet</ComboBoxItem>
+                            <ComboBoxItem>fried meet</ComboBoxItem>
+                            <ComboBoxItem>russian bread</ComboBoxItem>
+                            <ComboBoxItem>bulgarian bread</ComboBoxItem>
+                            <ComboBoxItem>tomato</ComboBoxItem>
+                            <ComboBoxItem>fish</ComboBoxItem>
+                        </ComboBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="button_addPurchase" Content="Add to list of purchases" Margin="10" Click="button_addPurchase_Click"/>
+                            <Button x:Name="button_removePurchase" Content="Remove" Margin="10" Click="button_removePurchase_Click"/>
+                        </StackPanel>
+                        <Button x:Name="button_addCustomer" Content="Add yourself to shop" BorderBrush="Red" Click="button_addCustomer_Click"/>
+                    </StackPanel>
+                    <ListBox x:Name="listBox_purchases" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Basket">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="10">
+                        <Label Content="Basket:" HorizontalAlignment="Center"/>
+                        <DataGrid x:Name="dataGrid_basket" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+                                      RowBackground="LightGray" AlternatingRowBackground="White" Grid.Column="1" VerticalScrollBarVisibility="Visible"
+                                      IsReadOnly="True">
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="menuItem_remove" Header="Remove from basket" Click="menuItem_remove_Click"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Path = Name}"/>
+                                <DataGridTextColumn Header="Price" Width="100" Binding="{Binding Path = Price, StringFormat=F2}"/>
+                                <DataGridTextColumn Header="Weight" Width="50" Binding="{Binding Path = Weight, StringFormat=F2}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <DataGrid x:Name="dataGrid_repository" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+                                      RowBackground="LightGray" AlternatingRowBackground="White" Grid.Column="1" VerticalScrollBarVisibility="Visible"
+                                      IsReadOnly="True">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="menuItem_add" Header="Add to the basket" Click="menuItem_add_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Path = Name}"/>
+                            <DataGridTextColumn Header="Price" Width="100" Binding="{Binding Path = Price, StringFormat=F2}"/>
+                            <DataGridTextColumn Header="Weight" Width="50" Binding="{Binding Path = Weight, StringFormat=F2}"/>
+                            <DataGridTextColumn Header="Additives" Width="250" Binding="{Binding Path = Additives}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Border BorderBrush="Black" CornerRadius="5" BorderThickness="1" Grid.Column="2" Margin="10">
+                        <StackPanel>
+                            <CheckBox x:Name="checkBox_scores" HorizontalAlignment="Center" Margin="10" Content="Scores" IsEnabled="False"/>
+                            <Button x:Name="button_pay" Content="Pay all" Margin="10" Width="100" Click="button_pay_Click" IsEnabled="False"/>
+                            <TextBox x:Name="textBox_changes" IsReadOnly="True" Margin="10" Width="200"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
